@@ -539,6 +539,96 @@ loadQuestion();
     }
   });
 </script>
+  <!-- 🌟 Mr. Zee Editz: Fun & BTS Section 🌟 -->
+<section id="extras" style="background-color:#0d0d0d; color:white; padding:40px; text-align:center; border-radius:20px; margin:40px;">
+
+  <!-- 🎥 Behind The Scenes Section -->
+  <h2 style="color:#ff4444;">🎬 Behind The Scenes</h2>
+  <p style="font-size:18px;">A secret look at how <strong>Mr. Zee Editz</strong> creates fire AMVs 🔥</p>
+  
+  <video controls style="width:80%; border-radius:10px; margin-top:20px;">
+    <source src="https://drive.google.com/uc?export=download&id=1Xputiu2A5KbFVxyesTbUxvJP5QF_gBUk" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top:10px; font-size:15px; color:#aaa;">(Exclusive sneak peek – more coming soon!)</p>
+
+  <hr style="margin:40px 0; border:1px solid #333;">
+
+  <!-- 🎮 Mini Games Section -->
+  <h2 style="color:#1aff66;">🎮 Zee's Mini Games Zone</h2>
+  <p style="font-size:18px;">Play and chill while the next edit renders 😎</p>
+
+  <div id="gameZone" style="margin-top:25px;">
+    <!-- Game 1: Guess the Number -->
+    <h3 style="color:#ffcc00;">🔢 Guess the Number</h3>
+    <p>Enter a number between 1 and 10:</p>
+    <input type="number" id="guess" style="padding:5px; border-radius:5px; border:none;">
+    <button onclick="checkNumber()" style="background-color:#ffcc00; color:black; border:none; padding:5px 10px; border-radius:5px;">Try</button>
+    <p id="result" style="margin-top:10px;"></p>
+
+    <hr style="margin:30px 0; border:1px solid #333;">
+
+    <!-- Game 2: Click Speed Test -->
+    <h3 style="color:#00e6e6;">⚡ Click Speed Test</h3>
+    <p>Click as fast as you can in 5 seconds!</p>
+    <button id="clickBtn" onclick="countClick()" style="background-color:#00e6e6; color:black; border:none; padding:10px 20px; border-radius:8px;">Click Me!</button>
+    <p id="clicks" style="margin-top:10px;"></p>
+  </div>
+
+  <hr style="margin:40px 0; border:1px solid #333;">
+
+  <!-- 💌 Random Supporter Message -->
+  <div id="supporters" style="margin-top:40px; background-color:#111; padding:30px; border-radius:15px;">
+    <h2 style="color:#f44336;">💬 Random Supporter Message</h2>
+    <p id="randomMessage" style="font-size:18px; margin-top:15px;"></p>
+  </div>
+
+  <!-- ⚙️ JavaScript -->
+  <script>
+    // 🎬 Random Supporter Message
+    const messages = [
+      "🔥 'Bro your edits are pure fire!' — Ayan",
+      "💫 'Zeeshan bhai, your timing is god-level!' — Rehan",
+      "⚡ 'That last AMV literally gave me goosebumps!' — Arif",
+      "🌀 'Every frame hits the beat perfectly, insane skill!' — Rishav",
+      "🌑 'I’ve never seen such clean transitions before!' — Aman",
+      "💥 'Bro your edits are movie level!' — Danish",
+      "❤️ 'Keep going legend, one day you’ll rule YouTube!' — Faizan"
+    ];
+    document.getElementById("randomMessage").textContent =
+      messages[Math.floor(Math.random() * messages.length)];
+
+    // 🎮 Game 1: Guess the Number
+    const secretNumber = Math.floor(Math.random() * 10) + 1;
+    function checkNumber() {
+      const guess = parseInt(document.getElementById("guess").value);
+      const result = document.getElementById("result");
+      if (guess === secretNumber) {
+        result.textContent = "🎉 Correct! You’re a genius!";
+        result.style.color = "#00ff00";
+      } else {
+        result.textContent = "❌ Nope! Try again.";
+        result.style.color = "#ff4444";
+      }
+    }
+
+    // ⚡ Game 2: Click Speed Test
+    let clicks = 0;
+    let active = false;
+    function countClick() {
+      if (!active) {
+        active = true;
+        clicks = 0;
+        document.getElementById("clicks").textContent = "Go! Click fast!";
+        setTimeout(() => {
+          active = false;
+          document.getElementById("clicks").textContent = `You clicked ${clicks} times in 5 seconds ⚡`;
+        }, 5000);
+      }
+      if (active) clicks++;
+    }
+  </script>
+</section>
 <!-- ===== Editor Rank Card ===== -->
 <section id="rank-card" style="background-color:#050505; padding:70px 20px; text-align:center; border-top:1px solid #00bfff33; border-bottom:1px solid #00bfff33;">
 
