@@ -579,7 +579,87 @@ loadQuestion();
     <p>This website was a dream that took days of effort, creativity, and passion. Now it stands as a mark of my journey — from edits to dreams realized.</p>
     <a href="#feedback" class="btn">Share Your Thoughts</a>
   </section>
+<!-- ===== FUN ZONE SECTION ===== -->
+<section id="fun-zone" style="background:#050505;color:#fff;text-align:center;padding:80px 20px;">
+  <h2 style="color:#00bfff;font-size:2.2rem;margin-bottom:30px;">⚡ Zee’s Fun Zone ⚡</h2>
 
+  <!-- 🎧 Background Music Player -->
+  <div style="margin-bottom:40px;">
+    <h3 style="color:#00bfff;">🎵 Background Music</h3>
+    <p>Feel the vibe while exploring the site!</p>
+    <audio controls loop style="margin-top:10px;">
+      <source src="https://www.dropbox.com/scl/fi/yourmusic.mp3?raw=1" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- 💬 Fan Chat Wall -->
+  <div style="background:#0b0b0b;padding:25px;border-radius:10px;width:90%;max-width:600px;margin:0 auto 40px;">
+    <h3 style="color:#00bfff;">💬 Fan Chat Wall</h3>
+    <p style="color:#ccc;">Leave your shoutout for Mr. Zee Editz!</p>
+    <form action="https://formspree.io/f/xkgkwqyw" method="POST" style="margin-top:15px;">
+      <input type="text" name="name" placeholder="Your Name" required
+        style="padding:10px;width:90%;margin-bottom:10px;border-radius:6px;border:none;">
+      <textarea name="message" placeholder="Type your message..." required
+        style="padding:10px;width:90%;height:80px;border-radius:6px;border:none;"></textarea>
+      <br>
+      <button type="submit"
+        style="background:#00bfff;color:#000;font-weight:600;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;">Send
+        Message</button>
+    </form>
+  </div>
+
+  <!-- 🧠 Who Are You? Quiz -->
+  <div style="margin-bottom:40px;">
+    <h3 style="color:#00bfff;">🧠 Who Are You? (Editor Quiz)</h3>
+    <p>Answer these fun questions & discover your anime aura!</p>
+    <button onclick="startQuiz()" style="margin-top:15px;background:#00bfff;color:#000;padding:10px 25px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Start Quiz</button>
+    <p id="quizResult" style="margin-top:15px;font-weight:600;color:#fff;"></p>
+  </div>
+
+  <!-- 🕹️ Aura Click Booster Game -->
+  <div style="margin-bottom:30px;">
+    <h3 style="color:#00bfff;">🕹️ Aura Click Booster</h3>
+    <p>Tap to charge your aura and unlock Ultra Instinct!</p>
+    <button onclick="increaseAura()" id="auraButton"
+      style="background:#00bfff;color:#000;font-weight:600;padding:12px 25px;border:none;border-radius:6px;cursor:pointer;">Charge
+      Aura ⚡</button>
+    <p id="auraCount" style="margin-top:10px;font-size:1.2rem;">Aura Power: 0%</p>
+  </div>
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // 🧠 QUIZ SCRIPT
+  function startQuiz() {
+    const questions = [
+      "Do you prefer calm editing or aggressive syncs?",
+      "Do you love cinematic vibes or flashy transitions?",
+      "Pick your power: Emotion 💖 or Speed ⚡?"
+    ];
+    let score = 0;
+    for (let q of questions) {
+      let ans = prompt(q);
+      if (ans && ans.toLowerCase().includes("sync")) score++;
+      else if (ans && ans.toLowerCase().includes("speed")) score++;
+    }
+    const result = score >= 2
+      ? "You’re a Velocity Demon! 🔥"
+      : "You’re a Cinematic Soul! 💫";
+    document.getElementById("quizResult").innerText = result;
+  }
+
+  // 🕹️ AURA BOOSTER SCRIPT
+  let aura = 0;
+  function increaseAura() {
+    aura += 5;
+    if (aura > 100) aura = 100;
+    document.getElementById("auraCount").innerText = `Aura Power: ${aura}%`;
+    if (aura === 100) {
+      document.getElementById("auraButton").innerText = "💥 Ultra Instinct Unlocked!";
+    }
+  }
+</script>
   <!-- ===== CONTACT / FEEDBACK SECTION ===== -->
 <section id="contact">
   <h2>Contact & Feedback</h2>
