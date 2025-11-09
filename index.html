@@ -327,8 +327,8 @@
   <section id="updates">
     <h2>Latest Announcements</h2>
     <div class="update-box">
-      <h3>🔥 New AMV Dropping Soon!</h3>
-      <p>Stay tuned for my next cinematic AMV project featuring Demon Slayer x Gojo mix — dropping this weekend!</p>
+      <h3>Website Under Maintenance!🙏</h3>
+      <p>Website Under Maintenance So If You Had Any Issue Please Give Us Feedback!</p>
     </div>
   </section>
 
@@ -362,15 +362,103 @@
     <a href="#feedback" class="btn">Share Your Thoughts</a>
   </section>
 
-  <section id="feedback">
-    <h2>Feedback 💬</h2>
-    <form onsubmit="event.preventDefault(); document.getElementById('successMsg').style.display='block'; this.reset();">
-      <input type="text" placeholder="Your Name" required>
-      <textarea rows="5" placeholder="Your Feedback..." required></textarea>
-      <button type="submit">Send Feedback</button>
-      <div id="successMsg">✅ Thank you! Your feedback has been recorded.</div>
-    </form>
-  </section>
+  <!-- ===== CONTACT / FEEDBACK SECTION ===== -->
+<section id="contact">
+  <h2>Contact & Feedback</h2>
+  <p>Have suggestions, questions, or feedback about my AMVs or website?  
+  Drop your thoughts below — I’d love to hear from you!</p>
+
+  <form action="https://formspree.io/f/xkgkwqyw" method="POST" class="feedback-form">
+    <div class="form-group">
+      <label for="name">Your Name</label><br>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Your Email</label><br>
+      <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Your Message</label><br>
+      <textarea id="message" name="message" rows="5" placeholder="Write your feedback here..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn">Send Feedback</button>
+  </form>
+
+  <p id="status-msg" style="margin-top:15px;color:#00bfff;font-weight:500;"></p>
+</section>
+
+<!-- ===== JS FOR FORM FEEDBACK ===== -->
+<script>
+const form = document.querySelector(".feedback-form");
+const statusMsg = document.getElementById("status-msg");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+    if (response.ok) {
+      statusMsg.textContent = "✅ Thanks for your feedback! I’ll check it soon.";
+      form.reset();
+    } else {
+      statusMsg.textContent = "❌ Oops! Something went wrong. Please try again.";
+    }
+  } catch (error) {
+    statusMsg.textContent = "⚠️ Network error. Try again later.";
+  }
+});
+</script>
+
+<style>
+.feedback-form {
+  margin-top: 30px;
+  background: #111;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+}
+
+.feedback-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.feedback-form label {
+  color: #bbb;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 8px;
+  border: 1px solid #00bfff;
+  border-radius: 8px;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 10px #00bfff;
+  outline: none;
+}
+</style>
 
   <footer>© 2025 Mr. Zee Editz. All rights reserved.</footer>
 </body>
