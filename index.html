@@ -476,6 +476,69 @@ loadQuestion();
     <p>I'm <b>Mr. Zee Editz</b> — an AMV creator who merges anime, sound, and emotion into cinematic storytelling.</p>
     <img src="https://i.imgur.com/21da6af1a11272715f67c3d5ccac4941.jpg" alt="Mr. Zee Editz" />
   </section>
+  <!-- 🏆 Leaderboard Section -->
+<section id="leaderboard" style="text-align:center; padding:40px; background:#000; color:white;">
+  <h2>🏆 Trivia Leaderboard</h2>
+  <input type="text" id="playerName" placeholder="Enter your name" style="padding:10px; border-radius:10px;">
+  <input type="number" id="playerScore" placeholder="Your score" style="padding:10px; border-radius:10px;">
+  <button onclick="addScore()" style="padding:10px 20px; background:#ff3300; color:white; border:none; border-radius:10px;">Add Score</button>
+  
+  <ul id="scoreList" style="list-style:none; padding:20px;"></ul>
+</section>
+
+<script>
+  function addScore() {
+    const name = document.getElementById('playerName').value.trim();
+    const score = document.getElementById('playerScore').value.trim();
+    if(name && score) {
+      const list = document.getElementById('scoreList');
+      const li = document.createElement('li');
+      li.textContent = `${name} — ${score} pts`;
+      li.style.padding = '5px';
+      li.style.borderBottom = '1px solid gray';
+      list.appendChild(li);
+      document.getElementById('playerName').value = '';
+      document.getElementById('playerScore').value = '';
+    } else {
+      alert('Enter your name and score!');
+    }
+  }
+</script>
+  <!-- ⚔️ Character Selector -->
+<section id="character-selector" style="text-align:center; padding:40px; background:#111; color:white;">
+  <h2>Choose Your Aura Character ⚡</h2>
+  <select id="characterSelect" style="padding:10px; border-radius:10px;">
+    <option value="tanjiro">🔥 Tanjiro (Red Aura)</option>
+    <option value="gojo">💠 Gojo (Blue Aura)</option>
+    <option value="zenitsu">⚡ Zenitsu (Yellow Aura)</option>
+    <option value="zee">💀 Mr. Zee (Purple Aura)</option>
+  </select>
+</section>
+
+<script>
+  const select = document.getElementById('characterSelect');
+  select.addEventListener('change', function() {
+    let aura = select.value;
+    switch(aura) {
+      case 'tanjiro':
+        document.body.style.background = 'linear-gradient(to right, #330000, #ff3300)';
+        document.body.style.color = 'white';
+        break;
+      case 'gojo':
+        document.body.style.background = 'linear-gradient(to right, #001133, #0099ff)';
+        document.body.style.color = '#e0f7ff';
+        break;
+      case 'zenitsu':
+        document.body.style.background = 'linear-gradient(to right, #332200, #ffcc00)';
+        document.body.style.color = '#fff5cc';
+        break;
+      case 'zee':
+        document.body.style.background = 'linear-gradient(to right, #220033, #aa00ff)';
+        document.body.style.color = '#f2e5ff';
+        break;
+    }
+  });
+</script>
 <!-- ===== Editor Rank Card ===== -->
 <section id="rank-card" style="background-color:#050505; padding:70px 20px; text-align:center; border-top:1px solid #00bfff33; border-bottom:1px solid #00bfff33;">
 
