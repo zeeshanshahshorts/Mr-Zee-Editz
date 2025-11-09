@@ -750,6 +750,67 @@ loadQuestion();
     }
   }
 </script>
+ <!-- ❤️ Emotional Zone + Progress Tracker -->
+<section id="vibes" style="background:#0b0b0b; color:#fff; padding:50px 20px; text-align:center; border-radius:20px; margin:50px auto; max-width:900px; box-shadow:0 0 25px rgba(255,0,90,0.3); font-family:'Poppins',sans-serif;">
+  <h1 style="color:#ff3366; font-size:2.2em;">💔 Zee's Emotional Zone</h1>
+  <p style="font-size:17px; opacity:0.9;">“Jaha edits khatam hote hain, waha feels shuru hoti hai…”</p>
+
+  <!-- Shayari Section -->
+  <div id="shayariBox" style="margin-top:30px; background:#111; border-radius:15px; padding:25px; max-width:700px; margin:auto; box-shadow:0 0 20px rgba(255,51,102,0.4);">
+    <p id="shayariText" style="font-size:20px; font-style:italic; color:#ffb3c6; line-height:1.6;"></p>
+    <button onclick="newShayari()" style="margin-top:20px; background:#ff3366; color:#fff; border:none; padding:10px 25px; border-radius:10px; cursor:pointer; font-weight:bold;">💫 Next Line</button>
+  </div>
+
+  <!-- Progress Tracker -->
+  <div id="progressTracker" style="margin-top:60px; background:#111; padding:30px; border-radius:15px; max-width:700px; margin:auto;">
+    <h2 style="color:#33c4ff;">⚙️ AMV Progress Tracker</h2>
+    <p style="color:#ccc; font-size:16px;">Rendering emotions... stay tuned 💥</p>
+    <div style="background:#222; border-radius:10px; overflow:hidden; margin-top:15px;">
+      <div id="progressBar" style="width:0%; height:25px; background:linear-gradient(90deg, #ff3366, #33c4ff); transition:width 0.8s;"></div>
+    </div>
+    <p id="progressPercent" style="margin-top:10px; color:#ffb3c6; font-weight:bold;">0%</p>
+  </div>
+
+  <!-- JavaScript Magic -->
+  <script>
+    // 💔 Rhymed Shayari Collection (Sigma + Emotional)
+    const shayaris = [
+      "💭 'Woh chhod gayi... par beat ne saath nibhaya, dard bhi bassline pe naya lagaya.'",
+      "🔥 'Jo gaya, woh scene bana... dil render hua, par edit kamaal ka tha.'",
+      "💔 'Breakup ka scene slow motion mein aaya, dil bhi sync mein roya, edit bhi roya.'",
+      "🎧 'Uski yaadein lyrics ban gayi, aur main visualizer ho gaya.'",
+      "👑 'Sigma edit ka rule hai bhai — jisse chhoda, wohi trending line ban jaaye.'",
+      "⚡ 'Feel se edit banta hai, heartbreak se render hota hai.'",
+      "🌙 'Kya karun bhai, har sad beat pe uska flashback aata hai.'",
+      "🔥 'Camera zoom out, par aankhon mein zoom in — uska naam ab bhi transition mein.'",
+      "💫 'Kuch log scene nahi... poori BGM hote hain, jaane ke baad bhi bajte rehte hain.'",
+      "🕶️ 'Main edit karta gaya, woh dissolve ho gayi, par clip mein har frame bolta raha — “she was mine.”'"
+    ];
+
+    function newShayari() {
+      const randomIndex = Math.floor(Math.random() * shayaris.length);
+      document.getElementById('shayariText').textContent = shayaris[randomIndex];
+    }
+    newShayari();
+
+    // ⚙️ Animated Progress Tracker
+    let progress = 0;
+    const bar = document.getElementById('progressBar');
+    const percent = document.getElementById('progressPercent');
+
+    const updateProgress = setInterval(() => {
+      if (progress < 100) {
+        progress += Math.floor(Math.random() * 4) + 1;
+        if (progress > 100) progress = 100;
+        bar.style.width = progress + "%";
+        percent.textContent = progress + "%";
+      } else {
+        clearInterval(updateProgress);
+        percent.textContent = "✅ Render Complete!";
+      }
+    }, 500);
+  </script>
+</section> 
   <!-- ===== CONTACT / FEEDBACK SECTION ===== -->
 <section id="contact">
   <h2>Contact & Feedback</h2>
