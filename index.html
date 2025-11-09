@@ -811,6 +811,136 @@ loadQuestion();
     }, 500);
   </script>
 </section> 
+ <!-- ===== Visitor Counter + Theme Switcher + Edit Upload Request ===== -->
+<section id="pro-tools" style="background:#070707;color:#fff;padding:40px;border-radius:12px;margin:30px auto;max-width:1000px;font-family:'Poppins',sans-serif;">
+
+  <!-- TOP ROW -->
+  <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+    <!-- Visitor Counter -->
+    <div id="visitBox" style="flex:1;min-width:220px;background:#0f0f0f;padding:18px;border-radius:12px;box-shadow:0 0 18px rgba(0,191,255,0.06);">
+      <h3 style="margin:0;color:#00bfff;">👁️‍🗨️ Visitor Counter</h3>
+      <p style="margin:8px 0 0;color:#ccc;font-weight:600;font-size:20px;"><span id="visitorCount">--</span> visits</p>
+      <small style="color:#888">(global site visits)</small>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div id="themeBox" style="flex:1;min-width:220px;background:#0f0f0f;padding:18px;border-radius:12px;box-shadow:0 0 18px rgba(0,191,255,0.06);text-align:center;">
+      <h3 style="margin:0;color:#ff66aa;">🎨 Theme Switcher</h3>
+      <p style="margin:8px 0 12px;color:#ccc;">Toggle site colors — saved to your browser</p>
+      <button id="themeToggle" style="padding:10px 18px;border-radius:10px;border:none;background:#00bfff;color:#000;font-weight:700;cursor:pointer;">Switch Theme</button>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1px solid #222;margin:22px 0;">
+
+  <!-- Edit Upload Request Form -->
+  <div id="uploadReq" style="background:#0b0b0b;padding:20px;border-radius:12px;">
+    <h3 style="color:#ffd166;margin:0 0 10px;">✉️ Request an AMV / Upload Idea</h3>
+    <p style="color:#ccc;margin:0 0 12px;">Fill the form — I’ll check requests and maybe turn your idea into an edit.</p>
+
+    <form id="uploadForm" action="https://formspree.io/f/xkgkwqyw" method="POST" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <input name="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid #222;background:#000;color:#fff;grid-column:span 1;">
+      <input name="_replyto" type="email" placeholder="Email (optional)" style="padding:10px;border-radius:8px;border:1px solid #222;background:#000;color:#fff;grid-column:span 1;">
+      <input name="anime" placeholder="Anime / Source (e.g., Demon Slayer)" required style="padding:10px;border-radius:8px;border:1px solid #222;background:#000;color:#fff;grid-column:span 1;">
+      <input name="music" placeholder="Music title or YouTube link" style="padding:10px;border-radius:8px;border:1px solid #222;background:#000;color:#fff;grid-column:span 1;">
+      <textarea name="description" placeholder="Describe idea: mood, key scenes, timing (e.g., 0:45 beat)..." rows="4" required style="padding:10px;border-radius:8px;border:1px solid #222;background:#000;color:#fff;grid-column:span 2;"></textarea>
+
+      <!-- hidden field to help you identify this form type -->
+      <input type="hidden" name="form-name" value="edit-request">
+
+      <div style="grid-column:span 2;display:flex;gap:10px;align-items:center;">
+        <button type="submit" style="padding:10px 18px;border-radius:8px;border:none;background:#ff3366;color:#fff;font-weight:700;cursor:pointer;">Send Request</button>
+        <div id="uploadStatus" style="color:#a8ffcf;font-weight:600;"></div>
+      </div>
+    </form>
+
+    <p style="color:#888;margin-top:10px;font-size:13px;">Tip: Give timestamps or scene references so I can find the best frames faster 😉</p>
+  </div>
+</section>
+
+<script>
+  // ---------- VISITOR COUNTER (CountAPI) ----------
+  // using namespace 'mrzeeeditz' and key 'visits' (you can change both)
+  (function(){
+    const countEl = document.getElementById('visitorCount');
+    const namespace = 'mrzeeeditz';
+    const key = 'visits';
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => { if(data && data.value !== undefined) countEl.textContent = data.value; else countEl.textContent = '---'; })
+      .catch(err => { console.error('CountAPI error', err); countEl.textContent = 'n/a'; });
+  })();
+
+  // ---------- THEME SWITCHER ----------
+  (function(){
+    const toggle = document.getElementById('themeToggle');
+    // default theme values (dark is default)
+    const themes = {
+      dark: { bg:'#000', text:'#fff', accent:'#00bfff', btnBg:'#00bfff', btnColor:'#000' },
+      light: { bg:'#f7f7f7', text:'#0b0b0b', accent:'#ff3366', btnBg:'#ff3366', btnColor:'#fff' }
+    };
+
+    function applyTheme(name) {
+      const t = themes[name];
+      document.documentElement.style.setProperty('--site-bg', t.bg);
+      document.documentElement.style.setProperty('--site-text', t.text);
+      document.documentElement.style.setProperty('--site-accent', t.accent);
+      document.body.style.background = t.bg;
+      document.body.style.color = t.text;
+      // update buttons / boxes that use inline styles where possible:
+      document.querySelectorAll('button').forEach(b => {
+        // keep primary look for themeToggle only
+        if(b.id === 'themeToggle') { b.style.background = t.btnBg; b.style.color = t.btnColor; }
+      });
+      localStorage.setItem('mrzee_theme', name);
+    }
+
+    // load saved theme
+    const saved = localStorage.getItem('mrzee_theme') || 'dark';
+    applyTheme(saved);
+
+    toggle.addEventListener('click', () => {
+      const current = localStorage.getItem('mrzee_theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+  })();
+
+  // ---------- EDIT UPLOAD REQUEST (AJAX with Formspree) ----------
+  (function(){
+    const form = document.getElementById('uploadForm');
+    const status = document.getElementById('uploadStatus');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending...';
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          status.style.color = '#8ef3c0';
+          status.textContent = '✅ Request sent! I will read it soon.';
+          form.reset();
+        } else {
+          const err = await res.json();
+          status.style.color = '#ff8a8a';
+          status.textContent = '❌ Error sending. Try again.';
+          console.error('Formspree error', err);
+        }
+      } catch (err) {
+        console.error('Network error', err);
+        status.style.color = '#ff8a8a';
+        status.textContent = '⚠️ Network error. Try later.';
+      }
+      setTimeout(()=> status.textContent = '', 6000);
+    });
+  })();
+</script> 
   <!-- ===== CONTACT / FEEDBACK SECTION ===== -->
 <section id="contact">
   <h2>Contact & Feedback</h2>
