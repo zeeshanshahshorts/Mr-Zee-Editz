@@ -349,7 +349,128 @@
       </div>
     </div>
   </section>
+<!-- ===== TRIVIA GAME SECTION ===== -->
+<section id="trivia-game" style="background:#050505; padding:80px 20px; text-align:center; border-top:1px solid #00bfff33; border-bottom:1px solid #00bfff33;">
+  <h2 style="font-size:2.4rem; color:#00bfff; text-shadow:0 0 20px #00bfff99; margin-bottom:40px;">🎮 Zee Editz Ultimate Trivia</h2>
+  <p style="color:#aaa; font-size:1.1rem; margin-bottom:30px;">Think you know <b>Mr. Zee Editz</b>? Let’s see if you’re a real legend 🔥</p>
 
+  <div id="quiz-box" style="background:#0d0d0d; padding:40px; border-radius:15px; box-shadow:0 0 25px #00bfff55; max-width:600px; margin:0 auto;">
+    <h3 id="question" style="color:#fff; margin-bottom:25px;"></h3>
+    <div id="options"></div>
+    <p id="result" style="margin-top:20px; font-weight:bold; color:#00bfff;"></p>
+  </div>
+</section>
+
+<script>
+const quizData = [
+  {
+    question: "🔥 Which AMV was the first uploaded by Mr. Zee Editz?",
+    options: ["Mortals Funk", "Eeyuh AMV", "Slay Muzan", "Shadow Mix"],
+    answer: "Mortals Funk"
+  },
+  {
+    question: "⚡ What editing style is Mr. Zee Editz best known for?",
+    options: ["Velocity Sync", "Lofi Chill", "Retro VHS", "Color Grading"],
+    answer: "Velocity Sync"
+  },
+  {
+    question: "🎥 Which anime appears the most in his AMVs?",
+    options: ["Demon Slayer", "Naruto", "Jujutsu Kaisen", "Attack on Titan"],
+    answer: "Demon Slayer"
+  },
+  {
+    question: "💎 What’s Mr. Zee Editz’s signature aura color?",
+    options: ["Blue Energy", "Crimson Flame", "White Lightning", "Shadow Purple"],
+    answer: "Blue Energy"
+  },
+  {
+    question: "🧠 What’s the main goal of his editing style?",
+    options: ["Cinematic Emotion", "Fast Cuts", "Comedy", "Tutorials"],
+    answer: "Cinematic Emotion"
+  },
+  {
+    question: "🔥 What software does he mainly edit on?",
+    options: ["CapCut", "After Effects", "VN Editor", "Premiere Pro"],
+    answer: "CapCut"
+  },
+  {
+    question: "🎬 Which AMV was based on Muzan Kibutsuji?",
+    options: ["Eeyuh AMV", "Slay Muzan", "Gojo Funk", "Final Dawn"],
+    answer: "Slay Muzan"
+  },
+  {
+    question: "💠 What name does he call his fanbase?",
+    options: ["Zee Squad", "Editz Army", "Aura Reapers", "Funk Lords"],
+    answer: "Aura Reapers"
+  },
+  {
+    question: "💥 What element defines his editing energy?",
+    options: ["Thunder", "Fire", "Shadow", "Light"],
+    answer: "Thunder"
+  },
+  {
+    question: "👑 What does the name 'Mr. Zee Editz' symbolize?",
+    options: ["Calm Focus", "Limitless Creativity", "Music Power", "Anime Passion"],
+    answer: "Limitless Creativity"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const resultEl = document.getElementById("result");
+
+function loadQuestion() {
+  const q = quizData[currentQuestion];
+  questionEl.innerText = q.question;
+  optionsEl.innerHTML = "";
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.style = "display:block;width:100%;background:#111;color:#fff;padding:12px;margin:8px 0;border:1px solid #00bfff77;border-radius:8px;cursor:pointer;transition:0.3s;";
+    btn.onmouseover = () => btn.style.background = "#00bfff22";
+    btn.onmouseout = () => btn.style.background = "#111";
+    btn.onclick = () => checkAnswer(opt);
+    optionsEl.appendChild(btn);
+  });
+  resultEl.innerText = "";
+}
+
+function checkAnswer(selected) {
+  const correct = quizData[currentQuestion].answer;
+  if (selected === correct) {
+    score++;
+    resultEl.style.color = "#00ff99";
+    resultEl.innerText = "✅ Correct!";
+  } else {
+    resultEl.style.color = "#ff4444";
+    resultEl.innerText = "❌ Wrong! Correct answer: " + correct;
+  }
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    setTimeout(loadQuestion, 1200);
+  } else {
+    setTimeout(() => showFinalScore(), 1000);
+  }
+}
+
+function showFinalScore() {
+  questionEl.innerText = "🏁 You finished the Ultimate Trivia!";
+  optionsEl.innerHTML = "";
+  let rank;
+  if (score >= 9) rank = "💎 Legendary Fan!";
+  else if (score >= 6) rank = "🔥 True Supporter!";
+  else if (score >= 3) rank = "⚡ Casual Viewer!";
+  else rank = "😅 New to the Zee Universe!";
+  
+  resultEl.style.color = "#00bfff";
+  resultEl.innerHTML = `You got <b>${score}</b> out of <b>${quizData.length}</b> correct.<br>Your Rank: <b>${rank}</b><br><br>Share your score and tag <b>@ZeeshanShahEditz</b> 💥`;
+}
+
+loadQuestion();
+</script>
   <section id="about">
     <h2>About Me</h2>
     <p>I'm <b>Mr. Zee Editz</b> — an AMV creator who merges anime, sound, and emotion into cinematic storytelling.</p>
