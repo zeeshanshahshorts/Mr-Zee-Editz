@@ -698,7 +698,31 @@ loadQuestion();
         Message</button>
     </form>
   </div>
+<!-- ===== SUPPORT ZONE ===== -->
+<section id="support" style="background:#080808; color:#fff; text-align:center; padding:80px 20px; border-top:2px solid #00bfff;">
+  <h2 style="color:#00bfff; font-size:2.2rem; margin-bottom:10px;">Support Zone 💖</h2>
+  <p style="color:#ccc; font-size:1.1rem; margin-bottom:20px;">If my edits touched your heart, drop some love & motivation ❤️🔥</p>
+  
+  <button id="loveBtn" style="background:#111; color:#ff3b3b; border:2px solid #ff3b3b; border-radius:8px; padding:12px 30px; font-weight:600; font-size:1rem; cursor:pointer; transition:0.3s;">
+    ❤️ Respect + Motivation (<span id="loveCount">0</span>)
+  </button>
 
+  <script>
+    // LOVE Counter System
+    let loveCount = localStorage.getItem('loveCountMrZee') || 0;
+    document.getElementById('loveCount').innerText = loveCount;
+
+    document.getElementById('loveBtn').addEventListener('click', () => {
+      loveCount++;
+      document.getElementById('loveCount').innerText = loveCount;
+      localStorage.setItem('loveCountMrZee', loveCount);
+      document.getElementById('loveBtn').style.boxShadow = "0 0 25px #ff3b3b";
+      setTimeout(()=>{document.getElementById('loveBtn').style.boxShadow = "none";},500);
+    });
+  </script>
+
+  <p style="color:#888; font-size:0.9rem; margin-top:15px;">Every click = one more reason to create better edits 💪</p>
+</section>
   <!-- 🧠 Who Are You? Quiz -->
   <div style="margin-bottom:40px;">
     <h3 style="color:#00bfff;">🧠 Who Are You? (Editor Quiz)</h3>
